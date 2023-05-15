@@ -1,32 +1,108 @@
-# Prerequisites
-*.d
+#include <iostream>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#include <string>
 
-# Precompiled Headers
-*.gch
-*.pch
+using namespace std;
+namespace hearthstone {
+  struct Card {
+    string name;
+    string type;
+    string text;
+    int mana = 0;
+    int attack = 0;
+    int health = 0;
+  };
+  Card create(string a) {
+    Card carta;
+    carta.name = a;
+    return carta;
+  }
+  void print(Card & card) {
+    cout << "name:" << card.name << endl;
+    cout << "text:" << card.text << endl;
+    cout << "type:" << card.type << endl;
+    cout << "mana: " << card.mana << endl;
+    cout << "attack: " << card.attack << endl;
+    cout << "health: " << card.health << endl;
+  }
+  void set_param(Card & card) {
+    int b;
+    string a;
+    cin >> a;
+    if (a == "name") {
+      getline(cin, a);
+      card.name = a;
+    } else if (a == "text") {
+      getline(cin, a);
+      card.text = a;
+    } else if (a == "type") {
+      getline(cin, a);
+      card.type = a;
+    } else if (a == "mana") {
+      cin >> b;
+      card.mana = b;
+    } else if (a == "attack") {
+      cin >> b;
+      card.attack = b;
+    } else if (a == "health") {
+      cin >> b;
+      card.health = b;
+    }
+  }
+  void get_param(Card & card) {
+    string a;
+    cin >> a;
+    if (a == "name") {
+      for (int i = 1; i < card.name.size(); i++) {
+        cout << card.name[i];
+      }
+      cout << endl;
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+    } else if (a == "text") {
+      for (int i = 1; i < card.text.size(); i++) {
+        cout << card.text[i];
+      }
+      cout << endl;
+    } else if (a == "type") {
+      for (int i = 1; i < card.type.size(); i++) {
+        cout << card.type[i];
+      }
+      cout << endl;
+    } else if (a == "mana") {
+      cout << card.mana << endl;
 
-# Fortran module files
-*.mod
-*.smod
+    } else if (a == "attack") {
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+      cout << card.attack << endl;
 
-# Executables
-*.exe
-*.out
-*.app
+    } else if (a == "health") {
+
+      cout << card.health << endl;
+    }
+  }
+}
+
+int main() {
+  string a;
+  hearthstone::Card carta;
+  while (true) {
+    cin >> a;
+    if (a == "quit") {
+      return 0;
+    } else if (a == "create") {
+      getline(cin, a);
+      carta = hearthstone::create(a);
+      cout << "created card" << carta.name << endl;
+    } else if (a == "print") {
+      hearthstone::print(carta);
+    } else if (a == "set") {
+      hearthstone::set_param(carta);
+    } else if (a == "get") {
+      hearthstone::get_param(carta);
+    } else {
+      cout << "unknown command: " << a << endl;
+    }
+
+  }
+
+}
